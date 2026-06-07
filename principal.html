@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang='pt'>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Site principal</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+<body>
+    <div class="container">
+        <h1>Bem-vindo ao site principal!</h1>
+        <p>Aqui você encontrará todo o conteúdo disponível.</p>
+
+        <div class="contents">
+            <a href="catalogos/medidas.html?senha=sabor" class="content-item">
+                <img src="imagens/medidas.png" alt="Medidas" >
+                <h2>Medidas</h2>
+            </a>
+            <a href="catalogos/galaxias.html?senha=sabor" class="content-item">
+                <img src="imagens/galaxias.png" alt="Galaxias">
+                <h2>Galaxias</h2>
+            </a>
+             <a href="catalogos/sistemas planetarios.html?senha=sabor" class="content-item">
+                <img src="imagens/sistemas planetarios.png" alt="Sistemas Planetários">
+                <h2>Sistemas Planetários</h2>
+            </a>
+            <a href="catalogos/estrelas.html?senha=sabor" class="content-item">
+                <img src="imagens/estrelas.png" alt="Estrelas">
+                <h2>Estrelas</h2>
+            </a>
+            <a href="catalogos/planetas.html?senha=sabor" class="content-item">
+                <img src="imagens/planetas.png" alt="Planetas">
+                <h2>Planetas</h2>
+            </a>
+            <a href="catalogos/pedras.html?senha=sabor" class="content-item">
+                <img src="imagens/pedras.png" alt="Pedras">
+                <h2>Pedras</h2>
+            </a>
+            <a href="catalogos/tecnologias.html?senha=sabor" class="content-item">
+                    <img src="imagens/tecnologias.png" alt="Tecnologias">
+                    <h2>Tecnologias</h2>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    // Captura o parâmetro "senha" da URL
+    const params = new URLSearchParams(window.location.search);
+    const senhaDigitada = params.get('senha');
+
+   
+    fetch('imagem.txt')
+        .then(response => response.text())
+        .then(senhaArquivo => {
+            const senhaCorreta = senhaArquivo.trim();
+           
+            if (senhaDigitada === senhaCorreta) {
+
+            } else {
+               
+                window.location.href = 'index.html';
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao carregar senha:', error);
+            document.getElementById('resultado').textContent = "Erro ao validar senha.";
+        });
+</script>

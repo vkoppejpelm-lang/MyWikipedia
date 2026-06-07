@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang='pt'>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Coloque a senha para acessar</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+<body>
+    <div class="container">
+        <h1>Coloque a senha para acessar</h1>
+        <input type='password' id='password' placeholder='Digite a senha aqui'>
+        <button onclick='checkPassword()'>Acessar</button> 
+    </div>
+</body>
+</html>
+<script>
+    function checkPassword() {
+        const passwordInput = document.getElementById('password');
+        const password = passwordInput.value;
+
+        // Busca o arquivo imagem.txt (tem que estar na mesma pasta do HTML)
+        fetch('imagem.txt')
+            .then(response => response.text())
+            .then(senhaArquivo => {
+                if (password === senhaArquivo.trim()) {
+                    alert('Acesso concedido!');
+                    // Redireciona passando a senha digitada como parâmetro na URL
+                    window.location.href = 'principal.html?senha=' + encodeURIComponent(password);
+                } else {
+                    alert('Senha incorreta. Tente novamente.');
+                    passwordInput.value = '';
+                }
+            })
+            .catch(error => console.error('Erro ao carregar senha:', error));
+    }
+</script>
